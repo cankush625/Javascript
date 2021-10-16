@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+</head>
+<body>
+    <p id="content">
+        "Content"
+    </p>
+</body>
+<script>
+    // Synchronous code. This is not an AJAX
+    function demo() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http:example.com", false);
+        xhr.send();
+
+        // xhr.responseText will make the page to wait till we receive the response from the URL
+        var response = xhr.responseText;
+        document.getElementById("content");
+    }
+
+    // Asynchronous code. This is an AJAX
+    function demo() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://www.example.com", false);
+        xhr.send();
+
+        // This function will run only when the response from URL is received
+        xhr.onload = _ => {
+            var response = xhr.responseText;
+            document.getElementById("content");
+        }
+    }
+</script>
+</html>
