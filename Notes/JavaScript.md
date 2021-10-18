@@ -54,7 +54,7 @@ We can provide as many arguments as we want using `...` before the parameter nam
     }
 ```
 
-# Immediately Invoked Function Expression (IIFE)
+## Immediately Invoked Function Expression (IIFE)
 These are used to run the function immediately after defining it. Here, we wrap the annonymous function in the parenthesis and invoke it using parenthesis afterwards.
 ```
     (function() {
@@ -62,13 +62,13 @@ These are used to run the function immediately after defining it. Here, we wrap 
     })();
 ```
 
-# Arrow functions
+## Arrow functions
 Arrow functions are always expressions. Arrow functions don't have their own this object.
 ```
     const sum = (num1, num2) => return num1 + num2;
 ```
 
-# Pure functions
+## Pure functions
 Pure function only depends on it's input parameters and only mutates variable within it's local scope. And also it should not produce any side effects.
 ```
     function square(num) {
@@ -76,7 +76,7 @@ Pure function only depends on it's input parameters and only mutates variable wi
     }
 ```
 
-# Higher Order functions
+## Higher Order functions
 A function that takes another function as an argument or returns a function when they are called.
 ```
     function makeCall() {
@@ -89,14 +89,14 @@ A function that takes another function as an argument or returns a function when
     }
 ```
 
-# Replacing for loop with function
+## Replacing for loop with function
 ```
     arr = [1, 2, 3, 4]
     const square = arr.map(num => num ** 2);
     console.log(square);
 ```
 
-# Closures
+## Closures
 Defining function inside a function
 ```
     const outer = () => {
@@ -104,4 +104,38 @@ Defining function inside a function
 
         }
     }
+```
+
+# Objects
+Objects are similar to the map. Objects cam be simply created using literal as `const obj = {}`.
+The object has a key and value. The key must be unique that looks like a string. The value can be anything.
+```
+    const obj = {
+        name: "Ankush",
+        age: 22
+    }
+```
+Another way to create an object is
+```
+    const person = {
+        name: "Ankush"
+    }
+
+    const obj = Object.create(person);
+    console.log(obj.name);
+```
+
+JavaScript objects are stored in the heap memory as references.
+
+# Forming method chains
+To form a method chains just like JQuery, we need to return the `this` from the method.
+```
+    const obj = {
+        name: "Ankush",
+        makeCall() {
+            return this;
+        }
+    }
+
+    obj.makeCall().makeCall();
 ```
