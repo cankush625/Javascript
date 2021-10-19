@@ -139,3 +139,53 @@ To form a method chains just like JQuery, we need to return the `this` from the 
 
     obj.makeCall().makeCall();
 ```
+
+# Console
+
+## Inspect the method on the console:
+```
+    console.log(console);
+```
+
+## Show variable named:
+```
+    console.table({ foo, bar });
+```
+
+## Group console logs:
+```
+    console.group();
+
+    console.log(1);
+    console.log(2);
+
+    console.groupEnd();
+```
+
+## Consitionally console log:
+```
+    console.assert(isLoggedIn, "User is logged in");
+```
+
+## Increment a counter in the console:
+```
+    console.count();
+    console.count();
+    console.count();
+```
+
+## Set a timer with the console:
+```
+    console.time();
+
+    console.timeLog("Some instruction");
+    console.timeLog("Another instruction");
+
+    console.timeEnd();
+```
+
+## Add custom CSS style to the console output:
+Use the special character to add some custom CSS to the console output.
+```
+    console.log("%c MESSAGE", "CSS_STYLE");
+```
