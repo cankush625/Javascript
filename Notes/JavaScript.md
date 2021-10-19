@@ -189,3 +189,54 @@ Use the special character to add some custom CSS to the console output.
 ```
     console.log("%c MESSAGE", "CSS_STYLE");
 ```
+
+# Modules
+
+A module is just a file that exports some JavaScript code.
+
+my-package.js
+```
+    console.log("some message");
+    export default 'package';
+```
+
+Import this file to use the code:
+
+my-app.js
+```
+    import package from "../my-package.js";
+```
+
+## Default export
+
+The default export allows the user to name the module whatever they want when importing. This is ideal for the modules that export a single class or function.
+
+## Named export
+
+User have to import the module by the name.
+my-package.js
+```
+    export const app = "myapp";
+```
+
+my-app.js
+```
+    import { app } from "../my-package.js";
+```
+
+Change the import name:
+my-app.js
+```
+    import { app as coolApp } from "../my-package.js";
+```
+
+Export list of variables:
+```
+    const car = "Rolse Royce";
+    const hypercar = "Aston Martin";
+
+    export {
+        car,
+        hypercar
+    }
+```
