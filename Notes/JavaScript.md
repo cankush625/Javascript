@@ -8,6 +8,18 @@ The browser knows whatever activies we are doing on the browser page. Even if we
 Every event has a name. For eg. if we click then the event has a name <b>onclick</b>.
 Browser understands the instructions in the language called <b>JavaScript</b>.
 
+# How JavaScript works
+
+Everything in JavaScript happens inside an `Execution Context`.
+
+Execution context consists of the two parts: `memory` component and `code` component.
+
+Memory component contains all of the variables and functions in key-value pairs. Memory component is also known as `Variable Environment`.
+
+Code component is where the code is executed one line at a time. Code component is also known as a `Thread of Execution`.
+
+JavaScript is a `synchronous` `single-threaded` language.
+
 # JavaScript Hack
 
 JavaScript code for current page is known to the borwser. We can run any of the JavaScript function present in the code of current page from the address bar in the browser.<br>
