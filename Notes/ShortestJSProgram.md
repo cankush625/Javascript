@@ -17,6 +17,15 @@ JavaScript engine also creates a `this` keyword. At the global level, `this` poi
 In the above code, variable num and function a are in the global space but variable sum is not in the glabal space.
 The variables and functions in the global space will get attach to the global object that is `window` object.
 
+If we write the new variable in function body without using var keyword then that variable will be considered from the global space and get attach to the window object.
+```
+    var num = 10;
+    function a() {
+        sum = 0;
+    }
+```
+In the above code, variable sum is in the global space and we can access it using window object as `window.sum`.
+
 ## Accessing variables and functions in the global space.
 We can access the variables and functions in the global space using the window object. If we don't put window infront of the variable or function, then it will assume that we are referring the variable or function from the global space that is from the `window` object. We can also access the variable or function from the global space using `this` keyword.
 ```
