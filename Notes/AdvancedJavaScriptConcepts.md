@@ -82,6 +82,13 @@ For the variable that should never be reassigned is defined using `const` type.
     For a function without arrow but defined as an anonymous function, it will store value undefined in the memory component in the first phase of execution context creation. Hence, it will also throw an error of undefined function.`
 ```
 
+## let and const declarations
+`Let and const declarations are hoisted.`
+Let and const have allocated memory but they are stored in different memory space than Global memory space. And we cannot access this declarations before putting actual values in them. This is the `hoisting` in let and const.
+
+### Temporal Dead Zone
+`Temporal Dead Zone` is the time since the let variable is hoisted and till it is initialized some value.
+
 ## Closures
 Defining a function inside a function is called `closure`.
 
