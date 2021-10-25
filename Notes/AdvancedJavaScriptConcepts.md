@@ -89,6 +89,98 @@ Let and const have allocated memory but they are stored in different memory spac
 ### Temporal Dead Zone
 `Temporal Dead Zone` is the time since the let variable is hoisted and till it is initialized some value.
 
+## Block Scope
+
+### Block
+The open and close curley braces is a block in JavaScript. Block is known as `Compound Statement`.
+```
+{
+}
+```
+The above code is the block in JavaScript and it is doing nothing.<br>
+Block is used to group multiple statements together. It is used to place multiple statements in the place where JavaScript expects only one statement.<br>
+Eg. For an if condition, JavaScript expects a single statement.
+```
+    if (true) true;
+```
+Above code is a valid if condition with a single statement.<br>
+If we want to write multiple statements into if condition then we need to use block.
+```
+    if (true) {
+        var num = 10;
+        console.log(num);
+    }
+```
+The `if` statement does not have curley braces in it's syntax.
+
+### Block Scope
+Every block has a separate memory space. The variables defined using `let` and `const` keywords are placed in the Block Scope. The variables defined in the block using `var` keyword are placed in the Global Scope.
+
+## Shadowing
+If the variable is defined outside the block with the same name then the variable inside the block shadows the variable outside the block.
+```
+    var num = 10;
+    let val = 50;
+    {
+        var num = 50;
+        let val = 60;
+        let a = 30;
+        console.log(num);
+        console.log(val);
+    }
+    console.log(num);
+    console.log(val);
+
+    // output
+    // 10
+    // 60
+    // 10
+    // 50
+```
+Here, `num` variable inside the block is shadowing the `num` outside the block. When the num inside the block is executed, it modifies the value of the variable num outside the block.<br>
+For variable defined with `let` keyword, the variable `val` inside the block has a block scope and the variable val outside the block has a script scope. The script scope is not a global scope.
+
+Shadowing works the same way in the function as well.
+
+### Illegal shadowing
+```
+    let a = 20;
+    {
+        var a = 40;
+    }
+```
+The above code is an illegal shadowing. It will throw the error a is already defined.<br>
+If variable is shadowing something, it should never cross the boundry of it's scope. In the above example, var crosses the boundry of the block.
+But if we put the above code in the function block then it will be an legal shadowing.
+```
+    let a = 20;
+    function sum() {
+        var a = 40;
+    }
+```
+The above code is legal shadowing because the variable defined using var does not crosses its boundry that is the function block.
+The `const` also behaves the same.
+
+But we can shadow the variable a using `let` keyword at both places.
+```
+    let a = 20;
+    {
+        let a = 40;
+    }
+```
+The above code is the valid shadowing.
+
+```
+    var a = 20;
+    {
+        let a = 40;
+    }
+```
+The above code is also the valid shadowing.
+
+## Arrow function scope
+The rules and scope that work on normal function are exactly same for the arrow function.
+
 ## Closures
 Defining a function inside a function is called `closure`.
 
