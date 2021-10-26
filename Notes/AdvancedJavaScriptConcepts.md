@@ -183,6 +183,85 @@ The rules and scope that work on normal function are exactly same for the arrow 
 
 ## Closures
 Defining a function inside a function is called `closure`.
+```
+    function x() {
+        var a = 10;
+        function y() {
+            console.log(a);
+        }
+        y();
+    }
+    x();
+
+    // output
+    // 10
+```
+
+### Returning a function from function
+```
+    function x() {
+        var a = 10;
+        function y() {
+            console.log(a);
+        }
+        return y;
+    }
+    var f = x();
+    f();
+
+    // output
+    // 10
+```
+The output of above code will be 10. Here, the function x is gone from memory after execution. So, there is not variable `a`. So, how could function `f` print the value 10? Here comes the role of `closure`.
+
+When function is returned from another function, it still maintain it's lexical scope. Hence, though function `x` no longer exist in the memoty, the function `y` remembers from where it is returned. Along with function `y` the lexical scope of the function `y` is also returned. So, `f` will have function `y` as well as the lexical scope of the function `y` when it is returned from the function `x`.
+
+### Corner cases with closures
+
+```
+    function x() {
+        var a = 10;
+        function y() {
+            console.log(a);
+        }
+        a = 100;
+        return y;
+    }
+    var f = x();
+    f();
+
+    // output
+    // 100
+```
+The output of above code will be 100 because the value of a is reassigned to 100 in the lexical scope of function `y` and then the function `y` with it's lexical scope is returned from function `x`.
+
+```
+    function x() {
+        var a = 10;
+        function y() {
+            var b = 30;
+            function z() {
+                console.log(a, b);
+            }
+            z();
+        }
+        y();
+    }
+    x();
+
+    // output
+    // 10, 30
+```
+In the above code, two closures will be formed. One closure `y` (with variable `b = 30`) for function `z` and another closure `x` (with variable `a = 10`) for function `y`. The variables are not garbage collected. The variables are retained in JavaScript closures.
+
+### Uses of Closures
+- Module Design Pattern
+- Currying
+- Functions like once
+- Memoize
+- Maintaining state in async world
+- setTimeouts
+- Iterators
 
 ## Objects
 Object is just a data structure that allows us to associate a collection of key-value pairs.
