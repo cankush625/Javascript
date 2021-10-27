@@ -263,6 +263,101 @@ In the above code, two closures will be formed. One closure `y` (with variable `
 - setTimeouts
 - Iterators
 
+## setTimeout + Closures
+```
+    function f() {
+        var num = 1;
+        setTimeout(function() {
+            console.log(num);
+        }, 2000);
+        console.log("Im executed before setTimeout");
+    }
+    f();
+
+    // output
+    // Im executed before setTimeout
+    // 1
+```
+If we execute above code then `Im executed before setTimeout` will be printed first then JavaScript waits for 2 seconds and then the callback function inside `setTimeout` will be executed and print value of variable `num` that is `1`.
+The callback function inside setTimeout forms a closure. setTimeout takes the callback function and stores the function somewhere and attaches the timer to this callback function. When the timer of callback function expires then it takes the callback function, put it again in the call stack and runs it.
+
+JavaScript doesn't wait for setTimeout to complete the timeout. It will execute the next code.
+
+### The wrong approach to use setTimeout
+```
+    function f() {
+        for (var i = 1; i <= 5; i++) {
+            setTimeout(function () {
+                console.log(i);
+            }, i * 1000);
+        }
+        console.log("Im executed before setTimeout");
+    }
+    f();
+
+    // output
+    // Im executed before setTimeout
+    // 6
+    // 6
+    // 6
+    // 6
+    // 6
+```
+The expected output of the above code is
+```
+    Im executed before setTimeout
+    1
+    2
+    3
+    4
+    5
+```
+But the output is print different that expected is because the the setTimeout is inside a function f. The callback function inside a setTimeout forms a closure. As the callback function inside setTimeout is stored somewhere till the timer expires, the for loop will done with its execution. So, value of `i` will be `6`. As the callback function inside setTimeout forms a closure, it haves the data of its lexical environment. The lexical environment have refernce to the variable `i`. The value of `i` is 6 by the time the timer of callback function expires. Hence, the output will be printed as five times `6`.<br>
+To fix the above code we have to use `let` for the variable `i`. This works because the `let` is block scoped. Hence, every callback function inside setTimeout will have it's own copy of the variable `i`.
+```
+    function f() {
+        for (let i = 1; i <= 5; i++) {
+            setTimeout(function () {
+                console.log(i);
+            }, i * 1000);
+        }
+        console.log("Im executed before setTimeout");
+    }
+    f();
+
+    // output
+    // Im executed before setTimeout
+    // 1
+    // 2
+    // 3
+    // 4
+    // 5
+```
+
+We can prform the same thing by using var as well. Here, somehow we have to give new copy of `i` everytime to callback function inside setTimeout.
+```
+    function f() {
+        for (var i = 1; i <= 5; i++) {
+            function close(x) {
+                setTimeout(function () {
+                    console.log(x);
+                }, x * 1000);
+            }
+            close(i);
+        }
+        console.log("Im executed before setTimeout");
+    }
+    f();
+
+    // output
+    // Im executed before setTimeout
+    // 1
+    // 2
+    // 3
+    // 4
+    // 5
+```
+
 ## Objects
 Object is just a data structure that allows us to associate a collection of key-value pairs.
 ```
