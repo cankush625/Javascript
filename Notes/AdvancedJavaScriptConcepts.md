@@ -262,6 +262,12 @@ In the above code, two closures will be formed. One closure `y` (with variable `
 - Maintaining state in async world
 - setTimeouts
 - Iterators
+- Data hiding and encapsulation
+
+### Disadvantages of Closures
+- Excess use of memory
+- Closures are not garbage collected
+- If not handled properly, it can lead to memory leak
 
 ## setTimeout + Closures
 ```
@@ -356,6 +362,52 @@ We can prform the same thing by using var as well. Here, somehow we have to give
     // 3
     // 4
     // 5
+```
+
+### Data hiding and encapsulation using Closure
+```
+    function counter() {
+        var count = 0;
+        return function incrementCount() {
+            count++;
+            console.log(count);
+        }
+    }
+
+    var counter1 = counter();
+    counter1();
+    counter1();
+
+    // output
+    // 1
+    // 2
+```
+In above code, variable count is hidden from outer scope. So, no one can use or modify the value of variable `count` from the outer scope. This is the data hiding and kind of an encapsulation.
+
+## Constructor function in JavaScript
+Constructor function is a good way to write multiple functions inside a function to form a Closure. We have to use `new` keyword while instantiating constructor function.
+```
+    function Counter() {
+        var count = 0;
+        this.incrementCounter = function () {
+            count++;
+            console.log(count);
+        }
+        this.decrementCounter = function () {
+            count--;
+            console.log(count);
+        }
+    }
+
+    var counter1 = new Counter();
+    counter1.incrementCounter();
+    counter1.incrementCounter();
+    counter1.decrementCounter();
+
+    // output
+    // 1
+    // 2
+    // 1
 ```
 
 ## Objects
