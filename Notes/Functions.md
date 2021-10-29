@@ -58,3 +58,49 @@ In the above code, `2` and `3` are called arguments.
 The ability of functions to use functions as values and pass functions as arguments to another function, or funcitons can be returned from functions are called First Class Functions.
 We can pass functions as arguments to another function.
 Functions are First Class Citizens in JavaScript.
+
+
+## Callback Functions
+When we pass function to another function it is called Callback function.<br>
+Callback allows us to do async operations in JavaScript.
+```
+    function x(y) {
+        console.log("x");
+        y();
+    }
+
+    x(function y() {
+        console.log("y");
+    });
+```
+The callback function forms a `closure` with it's outer environment/lexical environment.
+
+## Main Thread in JavaScript
+Call Stack is also known as Main Thread in JavaScript.
+We should never write a code that will block the main thread. So, we can use async operations in JavaScript to keep the main thread unblocked.
+
+## Event Listeners
+The event listeners take the callback function as argument.
+```
+    document.get ElementById("clickHere)
+        .addEventListener("click", function c() {
+            console.log("I'm clicked!");
+    });
+```
+
+To achieve the data hiding/encapsulation, we should use the event listeners with the Closures.
+```
+    function evntListener() {
+        let count = 0;
+        document.get ElementById("clickHere)
+            .addEventListener("click", function c() {
+                console.log("I'm clicked!", count++);
+        });
+    }
+
+    evntListener();
+```
+The callback function in Event Listener forms a `closure` with it's lexical environment.
+
+## Garbage Collection and removeEventListeners
+Event Listners are heavy. They take lots of memory because they form closure. That's why we should remove event listeners when we are not using them.
