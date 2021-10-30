@@ -214,7 +214,8 @@ Defining a function inside a function is called `closure`.
 ```
 The output of above code will be 10. Here, the function x is gone from memory after execution. So, there is not variable `a`. So, how could function `f` print the value 10? Here comes the role of `closure`.
 
-When function is returned from another function, it still maintain it's lexical scope. Hence, though function `x` no longer exist in the memoty, the function `y` remembers from where it is returned. Along with function `y` the lexical scope of the function `y` is also returned. So, `f` will have function `y` as well as the lexical scope of the function `y` when it is returned from the function `x`.
+When function is returned from another function, it still maintain it's lexical scope. Hence, though function `x` no longer exist in the memoty, the function `y` remembers from where it is returned. Along with function `y` the lexical scope of the function `y` is also returned. So, `f` will have function `y` as well as the lexical scope of the function `y` when it is returned from the function `x`.<br>
+Important Note and Observation: The function `y` will remember the lexical scope of function `x` only if the variables from function `x` are used in function `y`. If not any variable from function `x` is used in function `y` then function `y` will not remember the lexical scope of function `x` because it is of no use to function `y` here.
 
 ### Corner cases with closures
 
