@@ -139,3 +139,106 @@ Here, we will use Prototype or Prototypal inheritance to attach our own function
     // 1 4 9 16
 ```
 In the above example, `myCustomFunction` is our own custom function. This function behaves similar to the built-in functions for array like map. As we have added `myCustomFunction` to the array protype, this function is now available to all the arrays we create in this scope.
+
+## Map Filter Reduce
+### Map
+Map is used to transform the array.
+Map function takes a function as a argument and runs this function for every element in the array.
+```
+    const arr = [1, 2, 3, 4];
+
+    function square(x) {
+        return x * x;
+    }
+
+    const result = arr.map(double);
+    console.log(result);
+```
+Another way of writing above code
+```
+    const arr = [1, 2, 3, 4];
+
+    const result = arr.map(function square(x) {
+        return x * x;
+    });
+    console.log(result);
+```
+Just another way of witing above code
+```
+    const arr = [1, 2, 3, 4];
+
+    const result = arr.map((x) => x * x);
+    console.log(result);
+```
+
+### Filter
+Filter function is used to filter the array content. Filter function takes function as a argument and runs this function for every element in the array.
+```
+    const arr = [1, 2, 3, 4];
+
+    function isEven(x) {
+        return x % 2 === 0;
+    }
+
+    const result = arr.filter(isEven);
+    console.log(result);
+
+    // output
+    // [2, 4]
+```
+Another way of writing above code
+```
+    const arr = [1, 2, 3, 4];
+
+    const result = arr.filter((x) => x % 2 === 0);
+
+    console.log(result);
+```
+
+### Reduce
+Reduce is used when we have to take all of the elements of the array and come up with a single element.
+Reduce takes one function as argument. This argument function takes two parameter, first is accumulator and second is current. The current paramter has the value of current element in the array. The accumulator is used to accumulate the values of the array. The accumulator should be initialized. For this the second argument of the reduce function is the initial value of the accumulator, here it is 0.
+```
+    const arr = [1, 2, 3, 4];
+
+    const result = arr.reduce(function (acc, curr) {
+        acc = acc + curr;
+        return acc;
+    }, 0);
+
+    console.log(result);
+
+    // output
+    // 10
+```
+
+Find max element in the array using reduce function
+```
+    const arr = [1, 2, 3, 4];
+
+    const result = arr.reduce(function (max, curr) {
+        if (curr > max) {
+            max = curr;
+        }
+        return max;
+    }, 0);
+
+    console.log(result);
+
+    // output
+    // 4
+```
+
+### Chaining Map Reduce and Filter
+We can use the map, reduce and filter functions in a chain.
+```
+    const arr = [1, 2, 3, 4];
+
+    const result = arr.filter((x) => a < 3).map((x) => x * x);
+
+    console.log(result);
+
+    // output
+    // [1, 4]
+```
+We can do above code using reduce alone.
