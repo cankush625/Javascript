@@ -365,6 +365,27 @@ We can prform the same thing by using var as well. Here, somehow we have to give
     // 5
 ```
 
+### Tricky Interview Question on setTimeout:
+What will be the output of following code where timer is set to 0 miliseconds for setTimeout.
+```
+    console.log("Beginning");
+
+    setTimeout(function() {
+        console.log("Callback");
+    }, 0);
+
+    console.log("End");
+```
+
+The output of obove code will be:
+```
+    Beginning
+    End
+    Callback
+```
+This is because, the `Beginning` will be printed first. Then the callback with the timer 0 miliseconds will be registered and it will wait in the callback queue till the callstack becomes empty. Meanwhile, the control goes to next line of code in the main thread(callstack) and prints `End`, after this the callstack will be empty. Now, the callback function will be pushed to the callstack by event loop and the callback function will be executed and prints `Callstack` to the console.
+If there is more code after the line `console.log("End");` then that code will be executed first and if that code takes 10 seconds then the callback function will run after 10 seconds even if we set the timer to 0 seconds. These are the `trust issues` with setTimeout function. But it guarantees that the callback function will wait atleast for provided timer.
+
 ### Data hiding and encapsulation using Closure
 ```
     function counter() {
