@@ -104,3 +104,38 @@ The callback function in Event Listener forms a `closure` with it's lexical envi
 
 ## Garbage Collection and removeEventListeners
 Event Listners are heavy. They take lots of memory because they form closure. That's why we should remove event listeners when we are not using them.
+
+## Higher Order Functions
+A function that takes function as an argument OR returns a function from it is called `Higher Order Function`.
+
+```
+    function f(x) {
+        x();
+    }
+```
+Here, `f` is the Higher Order Function and `x` is the callback function.
+
+## Making a function available to call with array
+Here, we will use Prototype or Prototypal inheritance to attach our own function to array object and making that function available with every array we create.
+```
+    const nums = [1, 2, 3, 4];
+
+    const square = function (num) {
+        return num * num;
+    }
+
+    // `this` points to the array for which the myCustomFunction is called
+    Array.prototype.myCustomFunction = function (logic) {
+        const result = [];
+        for (let i = 0; i < this.length; i++) {
+            result.push(logic(this[i]));
+        }
+        return result;
+    }
+
+    console.log(nums.myCustomFunction(square));
+
+    // output
+    // 1 4 9 16
+```
+In the above example, `myCustomFunction` is our own custom function. This function behaves similar to the built-in functions for array like map. As we have added `myCustomFunction` to the array protype, this function is now available to all the arrays we create in this scope.
