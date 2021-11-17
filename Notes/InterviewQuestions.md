@@ -24,3 +24,14 @@ The `defer` attribute guarantees the order of execution of the scripts.
 ```
     <script defer src="" />
 ```
+
+
+## Debouncing in JavaScript
+Debouncing is used to improve the performance of the webpage.
+
+### Applications:
+
+Debouncing is used when we are implementing search bars. It is used to optimize the API calls that made when we type any letter in
+the search bar. Here, rather than making API call when we enter the letter, we can implement the functionality that if we pause
+while writing for 400 milliseconds then do an API call. This will reduce the number of API calls made and increase the performance
+of the system.
