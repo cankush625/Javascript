@@ -37,7 +37,7 @@ while writing for 400 milliseconds then do an API call. This will reduce the num
 of the system.
 
 
-# Event Bubbling and Even Capturing(Trickling) in JavaScript
+## Event Bubbling and Even Capturing(Trickling) in JavaScript
 
 If we have nested elements lets say div inside div inside div and lets say we have added onclick event to all of these three nested
 divs. Here, when user clicks on the inner div, it will call the onclick event of all three divs, but these onclick events will be 
@@ -134,3 +134,38 @@ Stop the bubbling and trickling propagation
         console.log("Child clicked!");
     }, false);
 ```
+
+
+## Event Delegation in JavaScript
+
+When we add event handlers for the elements, we add separate event handler for every element. This is not a right
+approach to use event handlers. This is because every event handler will reside in the memory and utilize lots of
+memory impacting the performance of the website.
+Lets say if we have a list like following:
+```
+    <ul id="electronics">
+        <li id="iphone12">Iphone 12</li>
+        <li id="applemacm1max">Apple Macbook M1 Max</li>
+        <li id="samsunggalaxy">Samsung Galaxy</li>
+    </ul>
+```
+
+In the above code, if we add event handler for every list item then it is not an efficient code.
+The solution is to use the concept of event delegation. From the event bubbling, we know that event are bubbled up
+in the website. The events on list items are propagated up to the ul tag with id electronics. Here, we can write a
+single event listener for ul element with electronics id and when event reaches there, we check on which item the 
+click had occured and we will redirect to the respective page. As we have used single event handler, the performance
+of the website will be improved.
+
+The use of event delegation is only possible because of event bubbling in JavaScript.
+```
+    document.querySelector("#electronics).addEventListener('click', (e) => {
+      console.log(e.target.id);
+      if (e.target.tagName == 'LI') {
+          window.location.href = "/" + e.target.id;
+      }
+    });
+```
+
+Note: Not all type of events are bubbled up. The events like blur or scroll are not propagated up and need to be handled
+separately. But the events like click are always propagated up.
