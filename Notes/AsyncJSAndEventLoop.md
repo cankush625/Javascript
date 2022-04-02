@@ -19,5 +19,9 @@ The fetch function is used to make API calls. The fetch function gives a promise
 All the callback functions that come through promises and mutation observer are go through microtask queue.
 All other callback functions goes through the callback queue.
 
+## Note:
+When the JS code runs, the one function from callback queue is executed (event loop pushes the function from callback queue to JS callstack). After that, event loop looks if the microtask queue has any functions, it will push the all of the functions from microtask queue to the callstack and when microtask queue becomes empty (all functions are executed) then it will push the next function from callback queue to the callstack. If microtask queue is already empty then it will keep on executing functions from callback queue (task queue). This means, after each time a task (from callback queue (task queue)) exits, the event loop checks if the task is returning the control to other JS Code. If not, then it will run all of the tasks from the microtask queue.  
+Read more: [Microtasks in JavaScript](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide#microtasks)
+
 ## Starvation of functions in callback queue
 Sometimes the callstack has lots of lines of code is to execute, so the callback functions inside the callback queue are keep on waiting for their turn to get execute. This is known as the starvation of the tasks/functions inside callback queue.
