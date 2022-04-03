@@ -25,3 +25,7 @@ Read more: [Microtasks in JavaScript](https://developer.mozilla.org/en-US/docs/W
 
 ## Starvation of functions in callback queue
 Sometimes the callstack has lots of lines of code is to execute, so the callback functions inside the callback queue are keep on waiting for their turn to get execute. This is known as the starvation of the tasks/functions inside callback queue.
+
+ ### Note:
+
+ NodeJS uses apre-allocated set of threads to run the asynchronous tasks called the Thread Pool. The default number of threads in thread pool is 4. We can increase or decrease the number of threads in thread pool.
